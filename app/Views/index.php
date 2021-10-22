@@ -1,0 +1,164 @@
+<!--
+=========================================================
+ Paper Dashboard - v2.0.0
+=========================================================
+
+ Product Page: https://www.creative-tim.com/product/paper-dashboard
+ Copyright 2019 Creative Tim (https://www.creative-tim.com)
+ UPDIVISION (https://updivision.com)
+ Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard/blob/master/LICENSE)
+
+ Coded by Creative Tim
+
+=========================================================
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url('assets/img/apple-icon.png');?>">
+    <link rel="icon" type="image/png" href="<?php echo base_url('assets/img/favicon.png');?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <!-- Extra details for Live View on GitHub Pages -->
+    
+    <title>Smart Adaptive E-Wallet System</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <!-- CSS Files -->
+    <link href="<?php echo base_url('assets/css2/bootstrap.min.css');?>" rel="stylesheet" />
+    <link href="<?php echo base_url('assets/css2/paper-dashboard.css?v=2.0.0');?>" rel="stylesheet" />
+    <!-- Datatable Files -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <div class="navbar-toggle">
+                    <button type="button" class="navbar-toggler">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                </div>
+                <a class="navbar-brand" href="#pablo">Smart Adaptive E-Wallet</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                <ul class="navbar-nav">
+                    <li class="nav-item btn-rotate dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="nc-icon nc-book-bookmark"></i>Register
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink2">
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="user/register">User</a>
+                                <a class="dropdown-item" href="parent/register">Parent</a>
+                                <a class="dropdown-item" href="merchant/register">Merchant</a>
+                                
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item btn-rotate dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="nc-icon nc-tap-01"></i>Login
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink2">
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="user/login">User</a>
+                                <a class="dropdown-item" href="parent/login">Parent</a>
+                                <a class="dropdown-item" href="merchant/login">Merchant</a>
+                                
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="wrapper wrapper-full-page ">
+        <div class="full-page section-image" filter-color="black" data-image="<?php echo base_url('assets/img/bg/fabio-mangione.jpg');?>">
+            <div class="content col-md-12 ml-auto mr-auto">
+                <div class="header py-5 pb-7 pt-lg-9">
+                    <div class="container col-md-10">
+                        <div class="header-body text-center mb-7">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8 col-md-12 pt-5">
+                                    <h1 class="text-white">Welcome to Smart Adaptive E-Wallet Management System</h1>
+
+                                    <p class="text-white text-lead mt-3 mb-0">Log in to our system</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer footer-black  footer-white ">
+                <div class="container-fluid">
+                    <div class="row">
+                        <nav class="footer-nav">
+                            <ul>
+                                <li>
+                                    <a href="https://www.ukm.my" target="_blank">UKM</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="credits ml-auto">
+                            <span class="copyright">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script> SK Innovation, made with <i class="fa fa-heart heart"></i> by <a class="text-white" href="https://www.creative-tim.com" target="_blank">Creative Tim</a> and <a class="text-white" target="_blank" href="https://updivision.com">UPDIVISION</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+
+<!-- SCRIPTS -->
+
+<!--   Core JS Files   -->
+    <script src="<?php echo base_url('assets/js2/core/jquery.min.js');?>"></script>
+    <script src="<?php echo base_url('assets/js2/core/popper.min.js');?>"></script>
+    <script src="<?php echo base_url('assets/js2/core/bootstrap.min.js');?>"></script>
+    <script src="<?php echo base_url('assets/js2/plugins/perfect-scrollbar.jquery.min.js');?>"></script>
+    <!--  Google Maps Plugin    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!-- Chart JS -->
+    <script src="<?php echo base_url('assets/js2/plugins/chartjs.min.js');?>"></script>
+    <!--  Notifications Plugin    -->
+    <script src="<?php echo base_url('assets/js2/plugins/bootstrap-notify.js');?>"></script>
+    <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="<?php echo base_url('assets/js2/paper-dashboard.min.js?v=2.0.0');?>" type="text/javascript"></script>
+    <!-- DataTables Plugin -->
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+    <script src="<?php echo base_url('assets/demo2/demo.js');?>"></script>
+    <script>
+        $(document).ready(function() {
+            demo.checkFullPageBackgroundImage();
+        });
+    </script>
+<!-- -->
+
+</body>
+</html>
