@@ -51,7 +51,7 @@ class SuperAdminController extends Controller
 
     public function newUser()
     {
-        $data = ['navactive' => 'usermgmt', 'pagetitle' => 'Add New User'];
+        $data = ['navactive' => 'usermgmt', 'pagetitle' => 'Add New User', 'backbutton' => "usermgmt"];
 
         echo view('templates/header', $data);
         echo view('sidebars/superadmin', $data);
@@ -110,7 +110,7 @@ class SuperAdminController extends Controller
 
         if($sqlresult == TRUE){
             
-            $data = ['navactive' => 'usermgmt', 'pagetitle' => 'Edit User', 'user' => $sqlresult];
+            $data = ['navactive' => 'usermgmt', 'pagetitle' => 'Edit User', 'user' => $sqlresult, 'backbutton' => "usermgmt"];
 
             echo view('templates/header', $data);
             echo view('sidebars/superadmin', $data);
@@ -155,7 +155,7 @@ class SuperAdminController extends Controller
 
         if($sqlresult != NULL){
             
-            $data = ['navactive' => 'usermgmt', 'pagetitle' => 'Delete User', 'user' => $sqlresult];
+            $data = ['navactive' => 'usermgmt', 'pagetitle' => 'Delete User', 'user' => $sqlresult, 'backbutton' => "usermgmt"];
 
             echo view('templates/header', $data);
             echo view('sidebars/superadmin', $data);
@@ -195,7 +195,7 @@ class SuperAdminController extends Controller
     public function newMerchant()
     {
         $session = session();
-        $data = ['navactive' => 'merchantmgmt', 'pagetitle' => 'Add New Merchant'];
+        $data = ['navactive' => 'merchantmgmt', 'pagetitle' => 'Add New Merchant', 'backbutton' => "merchantmgmt"];
 
         echo view('templates/header', $data);
         echo view('sidebars/superadmin', $data);
@@ -253,7 +253,7 @@ class SuperAdminController extends Controller
 
         if($sqlresult == TRUE){
             
-            $data = ['navactive' => 'merchantmgmt', 'pagetitle' => 'Edit Merchant', 'user' => $sqlresult];
+            $data = ['navactive' => 'merchantmgmt', 'pagetitle' => 'Edit Merchant', 'user' => $sqlresult, 'backbutton' => "merchantmgmt"];
 
             echo view('templates/header', $data);
             echo view('sidebars/superadmin', $data);
@@ -300,7 +300,7 @@ class SuperAdminController extends Controller
 
         if($sqlresult != NULL){
             
-            $data = ['navactive' => 'merchantmgmt', 'pagetitle' => 'Delete Merchant', 'user' => $sqlresult];
+            $data = ['navactive' => 'merchantmgmt', 'pagetitle' => 'Delete Merchant', 'user' => $sqlresult, 'backbutton' => "merchantmgmt"];
 
             echo view('templates/header', $data);
             echo view('sidebars/superadmin', $data);

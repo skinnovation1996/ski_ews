@@ -71,12 +71,13 @@ class UserController extends Controller
         echo view('templates/footer');
     }
 
-    public function viewTransactionById()
+    public function viewTransactionById($transaction_id = NULL)
     {
-        $transaction_id = $this->uri->segment(3);
-        if($transaction_id != NULL){
+        $transactionModel = new Transaction();
+        $sqlresult = $transactionModel->where('transaction_id', $transaction_id)->first();
+        if($sqlresult == TRUE){
             $session = session();
-            $data = ['navactive' => 'transactions', 'pagetitle' => 'Transactions'];
+            $data = ['navactive' => 'transactions', 'pagetitle' => 'Transactions', 'backbutton' => "transactions"];
 
             echo view('templates/header', $data);
             echo view('sidebars/user', $data);
@@ -85,7 +86,7 @@ class UserController extends Controller
             echo view('user/view_transaction');
             echo view('templates/footer');
         }else{
-            redirect('user/transactions'); 
+            return $this->response->redirect(site_url('user/transactions'));
         }
         
     }
@@ -106,7 +107,7 @@ class UserController extends Controller
     public function addCard()
     {
         $session = session();
-        $data = ['navactive' => 'cardmgmt', 'pagetitle' => 'Add New Card'];
+        $data = ['navactive' => 'cardmgmt', 'pagetitle' => 'Add New Card', 'backbutton' => "cardmgmt"];
 
         echo view('templates/header', $data);
         echo view('sidebars/user', $data);
@@ -116,12 +117,15 @@ class UserController extends Controller
         echo view('templates/footer');
     }
 
-    public function editCard()
+    public function editCard($card_id = NULL)
     {
         $card_id = $this->uri->segment(3);
-        if($card_id != NULL){
+        $cardModel = new PaymentCard();
+        $sqlresult = $cardModel->where('card_id', $card_id)->first();
+
+        if($sqlresult == TRUE){
             $session = session();
-            $data = ['navactive' => 'cardmgmt', 'pagetitle' => 'Edit Card'];
+            $data = ['navactive' => 'cardmgmt', 'pagetitle' => 'Edit Card', 'backbutton' => "cardmgmt"];
 
             echo view('templates/header', $data);
             echo view('sidebars/user', $data);
@@ -130,7 +134,7 @@ class UserController extends Controller
             echo view('user/edit_card');
             echo view('templates/footer');
         }else{
-            redirect('user/cardmgmt'); 
+            return $this->response->redirect(site_url('user/cardmgmt'));
         }
     }
 
@@ -163,7 +167,7 @@ class UserController extends Controller
     public function addPocket()
     {
         $session = session();
-        $data = ['navactive' => 'pockets', 'pagetitle' => 'Add New Pocket'];
+        $data = ['navactive' => 'pockets', 'pagetitle' => 'Add New Pocket', 'backbutton' => "pockets"];
 
         echo view('templates/header', $data);
         echo view('sidebars/user', $data);
@@ -173,12 +177,14 @@ class UserController extends Controller
         echo view('templates/footer');
     }
 
-    public function editPocket()
+    public function editPocket($pocket_id = NULL)
     {
-        $pocket_id = $this->uri->segment(3);
-        if($pocket_id != NULL){
+        $pocketModel = new Pocket();
+        $sqlresult = $pocketModel->where('pocket_id', $pocket_id)->first();
+
+        if($sqlresult == TRUE){
             $session = session();
-            $data = ['navactive' => 'pockets', 'pagetitle' => 'Edit Pocket'];
+            $data = ['navactive' => 'pockets', 'pagetitle' => 'Edit Pocket', 'backbutton' => "pockets"];
 
             echo view('templates/header', $data);
             echo view('sidebars/user', $data);
@@ -187,16 +193,18 @@ class UserController extends Controller
             echo view('user/edit_pocket');
             echo view('templates/footer');
         }else{
-            redirect('user/pockets'); 
+            return $this->response->redirect(site_url('user/pockets'));
         }
     }
 
-    public function viewPocketTransactionbyId()
+    public function viewPocketTransactionbyId($pocket_id = NULL)
     {
-        $pocket_id = $this->uri->segment(3);
-        if($pocket_id != NULL){
+        $pocketModel = new Pocket();
+        $sqlresult = $pocketModel->where('pocket_id', $pocket_id)->first();
+
+        if($sqlresult == TRUE){
             $session = session();
-            $data = ['navactive' => 'pockets', 'pagetitle' => 'View Pocket Transactions'];
+            $data = ['navactive' => 'pockets', 'pagetitle' => 'View Pocket Transactions', 'backbutton' => "pockets"];
 
             echo view('templates/header', $data);
             echo view('sidebars/user', $data);
@@ -205,7 +213,7 @@ class UserController extends Controller
             echo view('user/pocket_transcations');
             echo view('templates/footer');
         }else{
-            redirect('user/pockets'); 
+            return $this->response->redirect(site_url('user/pockets'));
         }
     }
 
