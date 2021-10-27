@@ -2,6 +2,10 @@
 
 namespace App\Controllers;
 use CodeIgniter\Controller;
+use App\Models\User;
+use App\Models\Card;
+use App\Models\Transaction;
+use App\Models\Pocket;
 
 class ParentController extends Controller
 {
@@ -92,42 +96,16 @@ class ParentController extends Controller
         echo view('templates/footer');
     }
 
-    public function setUpBankIndex()
+    public function profileIndex()
     {
         $session = session();
-        $data = ['navactive' => 'setupbank', 'pagetitle' => 'Set Up/Link Bank'];
+        $data = ['navactive' => 'profile', 'pagetitle' => 'User Profile'];
 
         echo view('templates/header', $data);
-        echo view('sidebars/merchant', $data);
-        echo view('navbars/merchant', $data);
+        echo view('sidebars/parent', $data);
+        echo view('navbars/parent', $data);
 
-        echo view('merchant/setupbank');
-        echo view('templates/footer');
-    }
-
-    public function addBankDetailsIndex()
-    {
-        $session = session();
-        $data = ['navactive' => 'setupbank', 'pagetitle' => 'Set Up/Link Bank'];
-
-        echo view('templates/header', $data);
-        echo view('sidebars/merchant', $data);
-        echo view('navbars/merchant', $data);
-
-        echo view('merchant/add_bank_details');
-        echo view('templates/footer');
-    }
-
-    public function addBankDetails()
-    {
-        $session = session();
-        $data = ['navactive' => 'setupbank', 'pagetitle' => 'Set Up/Link Bank'];
-
-        echo view('templates/header', $data);
-        echo view('sidebars/merchant', $data);
-        echo view('navbars/merchant', $data);
-
-        echo view('merchant/add_bank_details');
+        echo view('parent/profile');
         echo view('templates/footer');
     }
 }

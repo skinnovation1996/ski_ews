@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use CodeIgniter\Controller;
+use App\Models\MerchantTransaction;
 
 class MerchantController extends Controller
 {
@@ -121,6 +122,19 @@ class MerchantController extends Controller
         echo view('navbars/merchant', $data);
 
         echo view('merchant/add_bank_details');
+        echo view('templates/footer');
+    }
+
+    public function profileIndex()
+    {
+        $session = session();
+        $data = ['navactive' => 'profile', 'pagetitle' => 'User Profile'];
+
+        echo view('templates/header', $data);
+        echo view('sidebars/merchant', $data);
+        echo view('navbars/merchant', $data);
+
+        echo view('merchant/profile');
         echo view('templates/footer');
     }
 }

@@ -38,11 +38,11 @@
                             foreach ($result as $row){?>
                             <tr>
                                 <td><?php echo $count++;?></td>
-                                <td><?php echo $merchant_id = $row->merchant_id;?></td>
-                                <td><?php echo $row->name;?></td>
-                                <td><?php echo $row->type;?></td>
-                                <td><?php echo $row->email;?></td>
-                                <td><?php echo $row->created_at;?></td>
+                                <td><?php echo $merchant_id = $row['merchant_id'];?></td>
+                                <td><?php echo $row['name'];?></td>
+                                <td><?php echo $row['type'];?></td>
+                                <td><?php echo $row['email'];?></td>
+                                <td><?php echo date_format(date_create($row['created_at']), "d M Y, H:i:sa");?></td>
                                 <td><a href="edit_merchant/<?php echo $merchant_id;?>" class="btn btn-primary btn-sm" role="button">Edit</a>
                                 <a href="delete_merchant/<?php echo $merchant_id;?>" class="btn btn-danger btn-sm" role="button">Delete</a></td>
                             </tr>

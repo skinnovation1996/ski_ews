@@ -55,7 +55,7 @@ $routes->post('/superadmin/new_user', 'SuperAdminController::newUserAction',['fi
 $routes->get('/superadmin/edit_user/(:alphanum)', 'SuperAdminController::editUser/$1',['filter' => 'authSuperAdmin']);
 $routes->post('/superadmin/edit_user/(:alphanum)', 'SuperAdminController::editUserAction',['filter' => 'authSuperAdmin']);
 $routes->get('/superadmin/delete_user/(:alphanum)', 'SuperAdminController::deleteUser/$1',['filter' => 'authSuperAdmin']);
-$routes->post('/superadmin/delete_user/(:alphanum)', 'SuperAdminController::deleteUserAction',['filter' => 'authSuperAdmin']);
+$routes->post('/superadmin/delete_user/(:alphanum)', 'SuperAdminController::deleteUserAction/$1',['filter' => 'authSuperAdmin']);
 
 //MERCHANT MANAGEMENT
 $routes->get('/superadmin/merchantmgmt', 'SuperAdminController::merchantMgmtIndex',['filter' => 'authSuperAdmin']);
@@ -63,8 +63,8 @@ $routes->get('/superadmin/new_merchant', 'SuperAdminController::newMerchant',['f
 $routes->post('/superadmin/new_merchant', 'SuperAdminController::newMerchantAction',['filter' => 'authSuperAdmin']);
 $routes->get('/superadmin/edit_merchant/(:alphanum)', 'SuperAdminController::editMerchant/$1',['filter' => 'authSuperAdmin']);
 $routes->post('/superadmin/edit_merchant/(:alphanum)', 'SuperAdminController::editMerchantAction',['filter' => 'authSuperAdmin']);
-$routes->get('/superadmin/delete_merchant/(:alphanum)', 'SuperAdminController::deleteUser/$1',['filter' => 'authSuperAdmin']);
-$routes->post('/superadmin/delete_merchant/(:alphanum)', 'SuperAdminController::deleteMerchantAction',['filter' => 'authSuperAdmin']);
+$routes->get('/superadmin/delete_merchant/(:alphanum)', 'SuperAdminController::deleteMerchant/$1',['filter' => 'authSuperAdmin']);
+$routes->post('/superadmin/delete_merchant/(:alphanum)', 'SuperAdminController::deleteMerchantAction/$1',['filter' => 'authSuperAdmin']);
 
 //SECURITY MANAGEMENT
 $routes->get('/superadmin/securitymgmt', 'SuperAdminController::securityMgmtIndex',['filter' => 'authSuperAdmin']);
@@ -116,6 +116,8 @@ $routes->get('/user/add_card', 'UserController::addCard',['filter' => 'authUser'
 $routes->post('/user/add_card', 'UserController::addCardAction',['filter' => 'authUser']);
 $routes->get('/user/edit_card/(:alphanum)', 'UserController::editCard/$1',['filter' => 'authUser']);
 $routes->post('/user/edit_card/(:alphanum)', 'UserController::editCardAction',['filter' => 'authUser']);
+$routes->get('/user/delete_card/(:alphanum)', 'UserController::deleteCard/$1',['filter' => 'authUser']);
+$routes->post('/user/delete_card/(:alphanum)', 'UserController::deleteCardAction/$1',['filter' => 'authUser']);
 
 //SETTINGS
 $routes->get('/user/profile', 'UserController::profileIndex',['filter' => 'authUser']);
@@ -127,6 +129,8 @@ $routes->get('/user/add_pocket', 'UserController::addPocket',['filter' => 'authU
 $routes->post('/user/add_pocket', 'UserController::addPocketAction',['filter' => 'authUser']);
 $routes->get('/user/edit_pocket/(:alphanum)', 'UserController::editPocket/$1',['filter' => 'authUser']);
 $routes->post('/user/edit_pocket/(:alphanum)', 'UserController::editPocketAction/$1',['filter' => 'authUser']);
+$routes->get('/user/delete_pocket/(:alphanum)', 'UserController::deletePocket/$1',['filter' => 'authUser']);
+$routes->post('/user/delete_pocket/(:alphanum)', 'UserController::deletePocketAction/$1',['filter' => 'authUser']);
 $routes->get('/user/pocket_transaction/(:alphanum)', 'UserController::viewPocketTransactionbyId/$1',['filter' => 'authUser']);
 
 //ADAPTIVE MASTER BUDGET
@@ -199,6 +203,7 @@ $routes->get('/merchant/total_earnings', 'MerchantController::viewTotalEarnings'
 //SETUP LINK BANK
 $routes->get('/merchant/setupbank', 'MerchantController::setUpBankIndex',['filter' => 'authMerchant']);
 $routes->get('/merchant/add_bank_details', 'MerchantController::addBankDetails',['filter' => 'authMerchant']);
+$routes->post('/merchant/add_bank_details', 'MerchantController::addBankDetailsAction',['filter' => 'authMerchant']);
 $routes->post('/merchant/transfer_amount', 'MerchantController::transferAmount',['filter' => 'authMerchant']);
 
 //PAYMENT GATEWAY

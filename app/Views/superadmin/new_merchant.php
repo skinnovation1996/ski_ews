@@ -59,29 +59,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="phone-no">Phone Number</label>
-                                        <input type="number" id="phone-no" name="phone-no" class="form-control form-control-alternative" placeholder="Phone Number..." required>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group form-file-upload form-file-multiple">
-                                        <input type="file" name="file_name" id="file_name" multiple="" class="inputFileHidden" required>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control inputFileVisible" placeholder="Profile Picture (max 3MB, JPG/PNG/BMP only)">
-                                            <span class="input-group-btn">
-                                                <button type="button" class="btn btn-fab btn-round btn-primary">
-                                                    <i class="nc-icon nc-single-copy-04"></i>
-                                                </button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            -->
                         </div>
                     </div>
                     <div class="card-footer py-5">

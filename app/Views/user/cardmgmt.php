@@ -25,7 +25,8 @@
                             <thead class="text-primary">
                                 <th width="5%" scope="col">No.</th>
                                 <th width="5%" scope="col">Card</th>
-                                <th width="80%" scope="col">Card Number</th>
+                                <th width="70%" scope="col">Card Number</th>
+                                <th width="10%" scope="col">Expiry Date</th>
                                 <th width="10%" scope="col">Actions</th>
                             </thead>
                             <tbody>
@@ -50,10 +51,15 @@
                                         echo "<b style='color:green'>Others</b>";
                                 }
                                 ?></td>
-                                <td><?php echo $card_id = $card['card_id'];?></td>
-                                <td><?php echo $card['card_num_last_4_digits'];?></td>
-                                <td><a href="edit_card/<?php echo $user_id;?>" class="btn btn-primary btn-sm" role="button">Edit</a>
-                                <a href="delete_card/<?php echo $user_id;?>" class="btn btn-danger btn-sm" role="button">Delete</a></td>
+                                <td><?php 
+                                $card_id = $card['card_id'];
+                                $card_num = $card['card_num'];
+                                
+                                echo substr_replace($card_num,"xxxxxxxxxxxx",1,11);?></td>
+                                <td><?php 
+                                echo date_format(date_create($card['expiry_date']), "F Y");?></td>
+                                <td><a href="edit_card/<?php echo $card_id;?>" class="btn btn-primary btn-sm" role="button">Edit</a>
+                                <a href="delete_card/<?php echo $card_id;?>" class="btn btn-danger btn-sm" role="button">Delete</a></td>
                             </tr>
                             <?php
                             }

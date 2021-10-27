@@ -30,6 +30,16 @@ class RegisterController extends Controller
         $data = [];
         echo view('merchant/register', $data);
     }
+
+    public function generateParentCode($length = 10){
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
   
     public function registerUser()
     {
@@ -46,21 +56,36 @@ class RegisterController extends Controller
 
         if($this->validate($rules)){
             $userModel = new User();
+            $user_id = $this->request->getVar('user_id');
 
-            $data = [
-                'name'     => $this->request->getVar('name'),
-                'user_id'     => $this->request->getVar('user_id'),
-                'age'    => $this->request->getVar('age'),
-                'email'    => $this->request->getVar('email'),
-                'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
-            ];
+            //Check User ID Exists
+            $sqlresult = $userModel->where('user_id', $user_id)->first();
 
-            $userModel->save($data);
+            if($sqlresult == NULL){
 
-            //reserve for send e-mail to user
+                $data = [
+                    'name'     => $this->request->getVar('name'),
+                    'user_id'     => $this->request->getVar('user_id'),
+                    'age'    => $this->request->getVar('age'),
+                    'email'    => $this->request->getVar('email'),
+                    'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                    'parent_code' => "PRT-".$this->generateParentCode()
+                ];
 
-            $data['register_success'] = "You have successfully registered as user! You can log in to our system";
-            return redirect()->to('/user/login');
+                try{
+                    $userModel->insert($data);
+                }catch(\Exception $e) {
+                    $data['notmatch'] = 'Database error. Please try again';
+                    echo view('/user/register', $data);
+                }
+                //reserve for send e-mail to user
+
+                $data['register_success'] = "You have successfully registered as user! You can log in to our system";
+                echo view('/user/register', $data);
+            }else{
+                $data['notmatch'] = 'User ID already exists! Please enter a new one.';
+                echo view('/user/register', $data);
+            }
         }else{
             $data['validation'] = $this->validator;
             echo view('/user/register', $data);
@@ -73,8 +98,8 @@ class RegisterController extends Controller
         helper(['form']);
         $rules = [
             'name'          => 'required|min_length[2]|max_length[255]',
-            'parent_code'   => 'required|min_length[2]|max_length[255]|is_unique[ews_parent.parent_id]',
-            'user_id'       => 'required|min_length[2]|max_length[255]|',
+            'parent_code'   => 'required|min_length[2]|max_length[255]',
+            'user_id'       => 'required|min_length[2]|max_length[255]|is_unique[ews_parent.parent_id]',
             'email'         => 'required|min_length[4]|max_length[255]|valid_email|is_unique[ews_parent.email]',
             'password'      => 'required|min_length[4]|max_length[50]',
             'password_confirmation'  => 'matches[password]',
@@ -83,21 +108,48 @@ class RegisterController extends Controller
 
         if($this->validate($rules)){
             $parentModel = new UserParent();
+            $parent_code = $this->request->getVar('parent_code');
+            $parent_id = $this->request->getVar('user_id');
 
-            $data = [
-                'name'     => $this->request->getVar('name'),
-                'parent_code'     => $this->request->getVar('parent_code'),
-                'user_id'     => $this->request->getVar('user_id'),
-                'email'    => $this->request->getVar('email'),
-                'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
-            ];
+            //Check User ID Exists
+            $sqlresult = $parentModel->where('parent_id', $parent_id)->first();
 
-            $parentModel->save($data);
+            if($sqlresult == NULL){
 
-            //reserve for send e-mail to user
+                //Match parent_code with user
+                $userModel = new User();
+                $match = $userModel->where('parent_code',$parent_code)->first();
+        
+                if($match == TRUE){
+                    //now add the parent to the system
+                    $data = [
+                        'name'     => $this->request->getVar('name'),
+                        'parent_id'     => $this->request->getVar('user_id'),
+                        'user_id'   => $match['user_id'],
+                        'email'    => $this->request->getVar('email'),
+                        'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
+                    ];
 
-            $data['register_success'] = "You have successfully registered as parent! You can log in to our system";
-            return redirect()->to('/parent/login');
+                    try{
+                        $parentModel->insert($data);
+                    }catch(\Exception $e) {
+                        $data['notmatch'] = 'Database error. Please try again';
+                        echo view('/parent/register', $data);
+                    }
+                    //reserve for send e-mail to user
+
+                    $data['register_success'] = "You have successfully registered as parent! You can log in to our system";
+                    echo view('/parent/register', $data);
+        
+                }else{
+                    $data['notmatch'] = "Invalid parent code. Make sure you entered the parent code from the registered user. Please contact system administrator.";
+                    echo view('/parent/register', $data);
+                }
+            }else{
+                $data['notmatch'] = 'Parent ID already exists! Please enter a new one.';
+                echo view('/parent/register', $data);
+            }
+            
         }else{
             $data['validation'] = $this->validator;
             echo view('/parent/register', $data);
@@ -111,7 +163,7 @@ class RegisterController extends Controller
         $rules = [
             'name'          => 'required|min_length[2]|max_length[255]',
             'merchant_id'   => 'required|min_length[2]|max_length[255]|is_unique[ews_merchant.merchant_id]',
-            'type'          => 'required|min_length[2]|max_length[255]|',
+            'type'          => 'required|min_length[2]|max_length[255]',
             'email'         => 'required|min_length[4]|max_length[255]|valid_email|is_unique[ews_merchant.email]',
             'password'      => 'required|min_length[4]|max_length[50]',
             'password_confirmation'  => 'matches[password]',
@@ -120,21 +172,35 @@ class RegisterController extends Controller
 
         if($this->validate($rules)){
             $merchantModel = new Merchant();
+            $merchant_id = $this->request->getVar('merchant_id');
 
-            $data = [
-                'name'     => $this->request->getVar('name'),
-                'merchant_id'     => $this->request->getVar('merchant_id'),
-                'type'     => $this->request->getVar('type'),
-                'email'    => $this->request->getVar('email'),
-                'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
-            ];
+            //Check User ID Exists
+            $sqlresult = $merchantModel->where('merchant_id', $merchant_id)->first();
 
-            $merchantModel->save($data);
+            if($sqlresult == NULL){
 
-            //reserve for send e-mail to user
+                $data = [
+                    'name'     => $this->request->getVar('name'),
+                    'merchant_id'     => $this->request->getVar('merchant_id'),
+                    'type'     => $this->request->getVar('type'),
+                    'email'    => $this->request->getVar('email'),
+                    'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
+                ];
 
-            $data['register_success'] = "You have successfully registered as merchant! You can log in to our system";
-            return redirect()->to('/merchant/login');
+                try{
+                    $merchantModel->insert($data);
+                }catch(\Exception $e) {
+                    $data['notmatch'] = 'Database error. Please try again';
+                    echo view('/merchant/register', $data);
+                }
+                //reserve for send e-mail to user
+
+                $data['register_success'] = "You have successfully registered as merchant! You can log in to our system";
+                echo view('/merchant/register', $data);
+            }else{
+                $data['notmatch'] = 'Merchant ID already exists! Please enter a new one.';
+                echo view('/merchant/register', $data);
+            }
         }else{
             $data['validation'] = $this->validator;
             echo view('/merchant/register', $data);

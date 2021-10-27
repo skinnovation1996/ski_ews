@@ -5,7 +5,7 @@
                 <div class="card-header">
                     <h4 class="card-title">Delete Merchant</h4>
                 </div>
-                <form role="form" action="delete_merchant" method="post" enctype="multipart/form-data">
+                <form role="form" action="" method="post" enctype="multipart/form-data">
                     <div class="card-body">
                         <?php if(isset($_SESSION['message'])){ ?>
                             <div class="alert <?php echo $_SESSION['alertType'];?> alert-dismissible fade show" role="alert">
@@ -24,7 +24,7 @@
                                     <h3>Are you sure to remove this merchant from this system?</h3>
                                     <h4><b>Merchant ID:</b> <?php echo $merchant['merchant_id'];?></br>
                                     <b>Name:</b> <?php echo $merchant['name'];?></h4>
-                                    <input type="hidden" id="merchant_id" name="merchant_id" value="<?php echo $user['merchant_id'];?>">
+                                    <input type="hidden" id="merchant_id" name="merchant_id" value="<?php echo $merchant['merchant_id'];?>">
                                 </div>
                             </div>
                         </div>

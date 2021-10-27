@@ -131,6 +131,21 @@ The above copyright notice and this permission notice shall be included in all c
                                     <h4 class="card-title">Merchant Register</h4>
                                 </div>
                                 <div class="card-body ">
+                                    <?php if(isset($validation)):?>
+                                    <div class="alert alert-warning">
+                                    <?= $validation->listErrors() ?>
+                                    </div>
+                                    <?php endif;
+                                    if(isset($notmatch)):?>
+                                    <div class="alert alert-warning">
+                                    <?= $notmatch; ?>
+                                    </div>
+                                    <?php endif; 
+                                    if(isset($register_success)):?>
+                                    <div class="alert alert-success">
+                                    <?= $register_success; ?>
+                                    </div>
+                                    <?php endif; ?>
                                     <form class="form" method="POST" action='register' aria-label="Register">
                                         <div class="input-group">
                                             <div class="input-group-prepend">

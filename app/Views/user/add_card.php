@@ -54,6 +54,7 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['user_id'];?>" />
                     </div>
                     <div class="card-footer py-5">
                         <button type="submit" role="button" class="btn btn-primary pull-right" name="submit-button">Submit</button>

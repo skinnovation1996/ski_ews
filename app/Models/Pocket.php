@@ -10,6 +10,7 @@ class Pocket extends Model
     
     protected $allowedFields = [
         'pocket_id',
+        'user_id',
         'budget_amt',
         'total_spent_amt',
         'merchant_type',

@@ -15,7 +15,8 @@ class User extends Model
         'age',
         'email',
         'password',
-        'parent_code'
+        'parent_code',
+        'updated_at'
     ];
     
 }

@@ -37,15 +37,23 @@
                             <tr>
                                 <td><?php echo $count++;?></td>
                                 <td><?php echo $transaction_id = $transaction['transaction_id'];?></td>
-                                <td><?php echo $card['card_num_last_4_digits'];?></td>
-                                <td><a href="edit_card/<?php echo $user_id;?>" class="btn btn-primary btn-sm" role="button">Edit</a>
-                                <a href="delete_card/<?php echo $user_id;?>" class="btn btn-danger btn-sm" role="button">Delete</a></td>
+                                <td><?php 
+                                $pocket_id = $transaction['pocket_id'];
+                                $sqlq = $db->query("SELECT * FROM tbl_pockets WHERE pocket_id='$pocket_id'");
+                                
+                                
+                                ?></td>
+                                <td><?php echo date_format(date_create($transaction['created_at']), "d M Y, H:i:sa");?></td>
+                                <td><?php echo $transaction['merchant_name'];?></td>
+                                <td><?php echo $transaction['transaction_amt'];?></td>
+                                <td><?php echo $transaction['purchase_item_name'];?></td>
+                                <td><a href="view_transcation/<?php echo $transaction_id;?>" class="btn btn-primary btn-sm" role="button">View</a></td>
                             </tr>
                             <?php
                             }
                             }else{ ?>
                             <tr>
-                                <td colspan="4">No transactions available</td>
+                                <td colspan="8">No transactions available</td>
                             </tr>
                             <?php } ?>
                             </tbody>

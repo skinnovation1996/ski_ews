@@ -9,7 +9,10 @@ class Transaction extends Model
     protected $primaryKey = 'transaction_id';
     
     protected $allowedFields = [
+        'user_id',
         'pocket_id',
+        'created_at',
+        'updated_at',
         'merchant_name',
         'merchant_type',
         'transaction_amt',
