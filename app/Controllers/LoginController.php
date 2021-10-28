@@ -190,7 +190,7 @@ class LoginController extends Controller
         $merchant_id  = $this->request->getVar('merchant_id');
         $password = $this->request->getVar('password');
         
-        $data = $userModel->where('merchant_id', $parent_id)->first();
+        $data = $userModel->where('merchant_id', $merchant_id)->first();
         
         if($data){
             $pass = $data['password'];

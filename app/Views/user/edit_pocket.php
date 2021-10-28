@@ -40,10 +40,16 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="purchase_item_type">Item Type</label>
                                         <input type="text" id="purchase_item_type" name="purchase_item_type" class="form-control form-control-alternative" placeholder="Item Type..." value="<?php echo $pocket['purchase_item_type'];?>" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="merchant_type">Merchant Type</label>
+                                        <input type="text" id="merchant_type" name="merchant_type" class="form-control form-control-alternative" placeholder="Merchant Type..." value="<?php echo $pocket['merchant_type'];?>" required>
                                     </div>
                                 </div>
                             </div>

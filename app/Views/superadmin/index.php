@@ -82,7 +82,7 @@
                         <div class="col-7 col-md-8">
                             <div class="numbers">
                                 <p class="card-category">No. of Merchant Transactions</p>
-                                <p class="card-title">+45K<p>
+                                <p class="card-title">0<p>
                             </div>
                         </div>
                     </div>

@@ -6,15 +6,17 @@
                     <h4 class="card-title">Analytics</h4>
                 </div>
                 <div class="card-body">
-                    <?php if(isset($message)){ ?>
-                        <div class="alert <?php echo $alertType;?> alert-dismissible fade show" role="alert">
-                            <span class="alert-inner--icon"><i class="ni <?php echo $alertIcon;?>"></i> </span>
-                            <span class="alert-inner--text"><strong><?php echo $alertStart;?></strong> <?php echo $message;?></span>
+                    <?php if(isset($_SESSION['message'])){ ?>
+                        <div class="alert <?php echo $_SESSION['alertType'];?> alert-dismissible fade show" role="alert">
+                            <span class="alert-inner--icon"><i class="ni <?php echo $_SESSION['alertIcon'];?>"></i> </span>
+                            <span class="alert-inner--text"><strong><?php echo $_SESSION['alertStart'];?></strong> <?php echo $_SESSION['message'];?></span>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                    <?php } ?>
+                    <?php 
+                    $_SESSION['message'] = NULL;
+                    } ?>
                     Coming soon...
                     
                 </div>

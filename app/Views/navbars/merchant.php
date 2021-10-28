@@ -27,7 +27,7 @@
                         </p>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="profile">My Profile</a>
+                        <a class="dropdown-item" href="changepass">Change Password</a>
                         <a class="dropdown-item" href="logout">Log Out</a>
                     </div>
                     </li>

@@ -1,13 +1,12 @@
 {
-    "name": "codeigniter4/framework",
+    "name": "skinnovation1996/ski_ews",
     "type": "project",
-    "description": "The CodeIgniter framework v4",
+    "description": "Smart Adaptive E-Wallet System",
     "homepage": "https://codeigniter.com",
     "license": "MIT",
     "require": {
         "php": "^7.3 || ^8.0",
         "ext-curl": "*",
-        "ext-intl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
         "kint-php/kint": "^3.3",

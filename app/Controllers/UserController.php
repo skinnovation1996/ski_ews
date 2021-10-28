@@ -220,7 +220,7 @@ class UserController extends Controller
             $_SESSION['alertType'] = 'alert-danger';
             $_SESSION['alertIcon'] = 'nc-simple-remove';
             $_SESSION['alertStart'] = 'Error!';
-            return $this->response->redirect(site_url('user/cardmgmt'));
+            return $this->response->redirect(site_url("user/edit_card/$card_id"));
         }
         $_SESSION['message'] = 'You have successfully updated your card information.';
         $_SESSION['alertType'] = 'alert-success';
@@ -229,7 +229,54 @@ class UserController extends Controller
         return $this->response->redirect(site_url('user/cardmgmt'));
     }
 
+    public function deleteCard($card_id = null)
+    {
+        $cardModel = new Card();
+        $sqlresult = $cardModel->where('card_id', $card_id)->first();
+
+        if($sqlresult != NULL){
+            
+            $data = ['navactive' => 'usermgmt', 'pagetitle' => 'Delete Card', 'card' => $sqlresult, 'backbutton' => "cardmgmt", 'balance' => $this->yourBalance()];
+
+            echo view('templates/header', $data);
+            echo view('sidebars/user', $data);
+            echo view('navbars/user', $data);
+
+            echo view('user/delete_card');
+            echo view('templates/footer');
+        }else{
+            return $this->response->redirect(site_url('user/cardmgmt'));
+        }
+    }
+
+    public function deleteCardAction($card_id)
+    {
+        $cardModel = new Card();
+        $sqlresult = $cardModel->where('card_id', $card_id)->delete($card_id);
+        $_SESSION['message'] = 'You have successfully removed your payment card from the system.';
+        $_SESSION['alertType'] = 'alert-success';
+        $_SESSION['alertIcon'] = 'nc-check-2';
+        $_SESSION['alertStart'] = 'Success!';
+        return $this->response->redirect(site_url('user/cardmgmt'));
+    }
+
     public function profileIndex()
+    {
+        $userModel = new User();
+        $my_user_id = $_SESSION['user_id'];
+        $sqlresult = $userModel->where('user_id', $my_user_id)->first();
+        
+        $data = ['navactive' => 'profile', 'pagetitle' => 'User Profile', 'balance' => $this->yourBalance(), 'result' => $sqlresult];
+
+        echo view('templates/header', $data);
+        echo view('sidebars/user', $data);
+        echo view('navbars/user', $data);
+
+        echo view('user/profile');
+        echo view('templates/footer');
+    }
+
+    public function updateProfile()
     {
         $userModel = new User();
         $my_user_id = $_SESSION['user_id'];
@@ -335,6 +382,69 @@ class UserController extends Controller
         }
     }
 
+    public function editPocketAction()
+    {
+
+        $pocketModel = new Pocket();
+        $pocket_id = $this->request->getVar('pocket_id');
+
+        $data = [
+            'user_id' => $this->request->getVar('user_id'),
+            'budget_amt' => $this->request->getVar('budget_amt'),
+            'merchant_type'  => $this->request->getVar('merchant_type'),
+            'purchase_item_name' => $this->request->getVar('purchase_item_name'),
+            'purchase_item_type'  => $this->request->getVar('purchase_item_type'),
+            'updated_at' => date("Y-m-d H:i:s"),
+        ];
+
+        try{
+            $pocketModel->update($pocket_id, $data);
+        }catch(\Exception $e) {
+            $_SESSION['message'] = 'Database error. Please try again';
+            $_SESSION['alertType'] = 'alert-danger';
+            $_SESSION['alertIcon'] = 'nc-simple-remove';
+            $_SESSION['alertStart'] = 'Error!';
+            return $this->response->redirect(site_url("user/edit_pocket/$pocket_id"));
+        }
+        $_SESSION['message'] = 'You have successfully updated your pocket!';
+        $_SESSION['alertType'] = 'alert-success';
+        $_SESSION['alertIcon'] = 'nc-check-2';
+        $_SESSION['alertStart'] = 'Success!';
+        return $this->response->redirect(site_url('user/pockets'));
+    }
+
+    public function deletePocket($pocket_id = null)
+    {
+        $pocketModel = new Pocket();
+        $my_user_id = $_SESSION['user_id'];
+        $sqlresult = $pocketModel->where('user_id',$my_user_id)->where('pocket_id', $pocket_id)->first();
+
+        if($sqlresult != NULL){
+            
+            $data = ['navactive' => 'pockets', 'pagetitle' => 'Delete Pocket', 'balance' => $this->yourBalance(), 'backbutton' => "pockets", 'pocket' => $sqlresult];
+
+            echo view('templates/header', $data);
+            echo view('sidebars/user', $data);
+            echo view('navbars/user', $data);
+
+            echo view('user/delete_pocket');
+            echo view('templates/footer');
+        }else{
+            return $this->response->redirect(site_url('user/pocket'));
+        }
+    }
+
+    public function deletePocketAction($card_id)
+    {
+        $pocketModel = new Pocket();
+        $sqlresult = $pocketModel->where('pocket_id', $pocket_id)->delete($pocket_id);
+        $_SESSION['message'] = 'You have successfully removed your pocket from the system.';
+        $_SESSION['alertType'] = 'alert-success';
+        $_SESSION['alertIcon'] = 'nc-check-2';
+        $_SESSION['alertStart'] = 'Success!';
+        return $this->response->redirect(site_url('user/pocket'));
+    }
+
     public function viewPocketTransactionbyId($pocket_id = NULL)
     {
         $pocketModel = new Pocket();
@@ -377,7 +487,7 @@ class UserController extends Controller
             'wallet_id' => "WALLET-$my_user_id",
             'user_id' => $my_user_id,
             'num_of_pockets' => 0,
-            'total_amt'  => 0
+            'total_amt'  => "0.00"
         ];
         $walletModel->insert($data);
         return TRUE;
@@ -386,14 +496,15 @@ class UserController extends Controller
     public function yourBalance(){
         $walletModel = new Wallet();
         $my_user_id = $_SESSION['user_id'];
+        $yourBalance = 0.00;
         //Check your wallet exists
         $sqlresult = $walletModel->where('user_id',$my_user_id)->first();
 
         if($sqlresult == TRUE){
-            $yourBalance = $walletModel->select("total_amt")->where("user_id", $my_user_id)->get();
-            return $yourBalance;
+            $yourBalanceSql = $walletModel->select("total_amt")->where("user_id", $my_user_id)->get();
+            return $yourBalanceSql;
         }else{
-            $this->createWalletDefault();
+            $walletSql = $this->createWalletDefault();
             $yourBalance = $walletModel->select("total_amt")->where("user_id", $my_user_id)->get();
             return $yourBalance;
         }

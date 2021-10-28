@@ -9,6 +9,8 @@ class Wallet extends Model
     protected $primaryKey = 'wallet_id';
     
     protected $allowedFields = [
+        'wallet_id',
+        'user_id',
         'num_of_pockets',
         'total_amt'
     ];

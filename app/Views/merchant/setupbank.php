@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Top Up</h4>
+                    <h4 class="card-title">Set Up/Link Bank</h4>
                 </div>
                 <div class="card-body">
                     <?php if(isset($_SESSION['message'])){ ?>
@@ -17,7 +17,6 @@
                     <?php 
                     $_SESSION['message'] = NULL;
                     } ?>
-                    You can top-up your user's balance here...
                     
                 </div>
             </div>

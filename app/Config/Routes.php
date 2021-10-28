@@ -72,6 +72,10 @@ $routes->get('/superadmin/securitymgmt', 'SuperAdminController::securityMgmtInde
 //ANALYTICS
 $routes->get('/superadmin/analytics', 'SuperAdminController::analyticsIndex',['filter' => 'authSuperAdmin']);
 
+//SETTINGS
+$routes->get('/superadmin/changepass', 'SuperAdminController::changePassword',['filter' => 'authSuperAdmin']);
+$routes->post('/superadmin/changepass', 'SuperAdminController::changePasswordAction',['filter' => 'authSuperAdmin']);
+
 /*
 ======================================================================
 USER ROUTES
@@ -98,7 +102,7 @@ $routes->get('/user/logout', 'UserController::logout',['filter' => 'authUser']);
 $routes->get('/user/scanqr', 'UserController::scanQRIndex',['filter' => 'authUser']);
 $routes->post('/user/scanqr', 'UserController::scanQRPayment',['filter' => 'authUser']);
 
-//PAYMENT GATEWAY
+//PAYMENT GATEWAY *coming soon*
 $routes->get('/user/payment', 'UserController::paymentIndex',['filter' => 'authUser']);
 $routes->post('/user/payment', 'UserController::makePayment',['filter' => 'authUser']);
 
@@ -122,6 +126,7 @@ $routes->post('/user/delete_card/(:alphanum)', 'UserController::deleteCardAction
 //SETTINGS
 $routes->get('/user/profile', 'UserController::profileIndex',['filter' => 'authUser']);
 $routes->post('/user/profile', 'UserController::profileChangeAction',['filter' => 'authUser']);
+$routes->post('/user/changepass', 'UserController::changePasswordAction',['filter' => 'authUser']);
 
 //POCKET MANAGEMENT
 $routes->get('/user/pockets', 'UserController::pocketsIndex',['filter' => 'authUser']);
@@ -134,7 +139,7 @@ $routes->post('/user/delete_pocket/(:alphanum)', 'UserController::deletePocketAc
 $routes->get('/user/pocket_transaction/(:alphanum)', 'UserController::viewPocketTransactionbyId/$1',['filter' => 'authUser']);
 
 //ADAPTIVE MASTER BUDGET
-$routes->get('/user/adaptive_budget', 'UserController::adaptiveBudgetIndex',['filter' => 'authUser']);
+$routes->get('/user/adaptivebudget', 'UserController::adaptiveBudgetIndex',['filter' => 'authUser']);
 
 /*
 ======================================================================
@@ -162,7 +167,7 @@ $routes->get('/parent/logout', 'ParentController::logout',['filter' => 'authPare
 $routes->get('/parent/topup', 'ParentController::topUpIndex',['filter' => 'authParent']);
 $routes->post('/parent/topup', 'ParentController::topUpAction',['filter' => 'authParent']);
 
-//PAYMENT GATEWAY
+//PAYMENT GATEWAY *coming soon*
 $routes->get('/parent/payment', 'ParentController::paymentIndex',['filter' => 'authParent']);
 $routes->post('/parent/payment', 'ParentController::makepayment',['filter' => 'authParent']);
 
@@ -170,6 +175,11 @@ $routes->post('/parent/payment', 'ParentController::makepayment',['filter' => 'a
 $routes->get('/parent/transactions', 'ParentController::transactionIndex',['filter' => 'authParent']);
 $routes->get('/parent/view_transaction/(:alphanum)', 'ParentController::viewTransactionById/$1',['filter' => 'authParent']);
 $routes->get('/parent/view_transaction_by_pocket/(:alphanum)', 'ParentController::viewTransactionByPocket/$1',['filter' => 'authParent']);
+
+//SETTINGS
+$routes->get('/parent/profile', 'ParentController::profileIndex',['filter' => 'authParent']);
+$routes->post('/parent/profile', 'ParentController::profileChangeAction',['filter' => 'authParent']);
+$routes->post('/parent/changepass', 'ParentController::changePasswordAction',['filter' => 'authParent']);
 
 /*
 ======================================================================
@@ -193,7 +203,7 @@ $routes->get('/merchant/index', 'MerchantController::index',['filter' => 'authMe
 $routes->get('/merchant/logout', 'MerchantController::logout',['filter' => 'authMerchant']);
 
 //DISPLAY QR
-$routes->get('/merchant/displayQR', 'MerchantController::displayQR',['filter' => 'authMerchant']);
+$routes->get('/merchant/displayqr', 'MerchantController::displayQR',['filter' => 'authMerchant']);
 
 //VIEW TRANSACTION & TOTAL EARNINGS
 $routes->get('/merchant/transactions', 'MerchantController::transactionsIndex',['filter' => 'authMerchant']);
@@ -202,13 +212,19 @@ $routes->get('/merchant/total_earnings', 'MerchantController::viewTotalEarnings'
 
 //SETUP LINK BANK
 $routes->get('/merchant/setupbank', 'MerchantController::setUpBankIndex',['filter' => 'authMerchant']);
-$routes->get('/merchant/add_bank_details', 'MerchantController::addBankDetails',['filter' => 'authMerchant']);
+$routes->get('/merchant/add_bank_details', 'MerchantController::addBankDetailsIndex',['filter' => 'authMerchant']);
 $routes->post('/merchant/add_bank_details', 'MerchantController::addBankDetailsAction',['filter' => 'authMerchant']);
-$routes->post('/merchant/transfer_amount', 'MerchantController::transferAmount',['filter' => 'authMerchant']);
+$routes->get('/merchant/transfer_amount', 'MerchantController::transferAmount',['filter' => 'authMerchant']);
+$routes->post('/merchant/transfer_amount', 'MerchantController::transferAmountAction',['filter' => 'authMerchant']);
 
-//PAYMENT GATEWAY
+//PAYMENT GATEWAY *coming soon*
 $routes->get('/merchant/payment', 'MerchantController::paymentIndex',['filter' => 'authMerchant']);
 $routes->post('/merchant/payment', 'MerchantController::makepayment',['filter' => 'authMerchant']);
+
+//SETTINGS
+$routes->get('/merchant/profile', 'MerchantController::profileIndex',['filter' => 'authMerchant']);
+$routes->post('/merchant/profile', 'MerchantController::profileChangeAction',['filter' => 'authMerchant']);
+$routes->post('/merchant/changepass', 'MerchantController::changePasswordAction',['filter' => 'authMerchant']);
 
 /*
  * --------------------------------------------------------------------

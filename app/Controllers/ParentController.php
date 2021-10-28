@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\User;
+use App\Models\UserParent;
 use App\Models\Card;
 use App\Models\Transaction;
 use App\Models\Pocket;
@@ -28,11 +29,17 @@ class ParentController extends Controller
         session_destroy();
         return redirect()->to('..');
         
-    }  
+    }
+    
+    public function getUserID($my_user_id){
+        $parentModel = new UserParent();
+    }
 
     public function transactionIndex()
     {
         $session = session();
+        $my_user_id = $_SESSION['parent_id'];
+        $
         $data = ['navactive' => 'transactions', 'pagetitle' => 'Transactions'];
 
         echo view('templates/header', $data);
