@@ -4,7 +4,7 @@
 
 
 ## Installation
-To install, extract all the files to "C:/xampp/htdocs" directory. Create directory name "ews" and put all the files.
+To install, extract all the files to "C:/xampp/htdocs" directory. Create directory name "ews" and put all the files. To begin using this system, open command line and type on the following command "php spark serve" inside the "ews" directory. Open browser and type "localhost:8080".
 
 ## Database
 To setup database, open PHPMyAdmin via localhost, add new database name "ews" and import the sql file (ews.sql).
