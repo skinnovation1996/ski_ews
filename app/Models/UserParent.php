@@ -13,7 +13,8 @@ class UserParent extends Model
         'user_id',
         'card_number',
         'email',
-        'password'
+        'password',
+        'updated_at'
     ];
     
 }

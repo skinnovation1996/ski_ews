@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="white" data-active-color="danger">
+<div class="sidebar" data-color="parent" data-active-color="parent">
     <div class="logo">
         <a href="<?php echo base_url("parent/index");?>" class="simple-text logo-normal" style="text-align:center">
             Smart Adaptive E-Wallet<br>Parent
@@ -20,7 +20,7 @@
             </li>
             <li <?php if($navactive == "transactions") echo "class='active'";?>>
                 <a href="<?php echo base_url("parent/transactions");?>">
-                <i class="nc-icon nc-bell-55"></i>
+                <i class="nc-icon nc-paper"></i>
                 <p>Transactions</p>
                 </a>
             </li>

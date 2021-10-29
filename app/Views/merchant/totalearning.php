@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Analytics</h4>
+                    <h4 class="card-title">Your Total Earnings</h4>
                 </div>
                 <div class="card-body">
                     <?php if(isset($_SESSION['message'])){ ?>
@@ -17,8 +17,8 @@
                     <?php 
                     $_SESSION['message'] = NULL;
                     } ?>
-                    Coming soon...
-                    
+                    <h1>RM <?php echo number_format($totalearnings, 2); ?></h1>
+                    <i>More information coming soon...</i>
                 </div>
             </div>
         </div>

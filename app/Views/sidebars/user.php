@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="white" data-active-color="danger">
+<div class="sidebar" data-color="user" data-active-color="user">
     <div class="logo">
         <a href="<?php echo base_url("superadmin/user");?>" class="simple-text logo-normal" style="text-align:center">
             Smart Adaptive E-Wallet<br>User
@@ -26,7 +26,7 @@
             </li>
             <li <?php if($navactive == "transactions") echo "class='active'";?>>
                 <a href="<?php echo base_url("user/transactions");?>">
-                <i class="nc-icon nc-bell-55"></i>
+                <i class="nc-icon nc-paper"></i>
                 <p>Transactions</p>
                 </a>
             </li>
@@ -38,13 +38,13 @@
             </li>
             <li <?php if($navactive == "pockets") echo "class='active'";?>>
                 <a href="<?php echo base_url("user/pockets");?>">
-                <i class="nc-icon nc-single-02"></i>
+                <i class="nc-icon nc-bag-16"></i>
                 <p>Manage Pockets</p>
                 </a>
             </li>
             <li <?php if($navactive == "adaptivebudget") echo "class='active'";?>>
                 <a href="<?php echo base_url("user/adaptivebudget");?>">
-                <i class="nc-icon nc-single-02"></i>
+                <i class="nc-icon nc-money-coins"></i>
                 <p>Adaptive Budget</p>
                 </a>
             </li>

@@ -3238,6 +3238,18 @@ License - nucleoapp.com/license/
   .sidebar[data-color="black"]:after,
   .off-canvas-sidebar[data-color="black"]:after {
     background: #212120; }
+  .sidebar[data-color="superadmin"]:after,
+  .off-canvas-sidebar[data-color="superadmin"]:after {
+    background: #08b279; }
+    .sidebar[data-color="parent"]:after,
+    .off-canvas-sidebar[data-color="parent"]:after {
+    background: #08b279; }
+    .sidebar[data-color="merchant"]:after,
+    .off-canvas-sidebar[data-color="merchant"]:after {
+    background: #597c94; }
+    .sidebar[data-color="user"]:after,
+    .off-canvas-sidebar[data-color="user"]:after {
+    background: #091854; }
   .sidebar[data-active-color="primary"] .nav li.active > a,
   .sidebar[data-active-color="primary"] .nav li.active > a i,
   .sidebar[data-active-color="primary"] .nav li.active > a[data-toggle="collapse"],
@@ -3307,6 +3319,48 @@ License - nucleoapp.com/license/
   .off-canvas-sidebar[data-active-color="danger"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active .sidebar-mini-icon,
   .off-canvas-sidebar[data-active-color="danger"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active > a {
     color: #ef8157;
+    opacity: 1; }
+  .sidebar[data-active-color="user"] .nav li.active > a,
+  .sidebar[data-active-color="user"] .nav li.active > a i,
+  .sidebar[data-active-color="user"] .nav li.active > a[data-toggle="collapse"],
+  .sidebar[data-active-color="user"] .nav li.active > a[data-toggle="collapse"] i,
+  .sidebar[data-active-color="user"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active .sidebar-mini-icon,
+  .sidebar[data-active-color="user"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active > a,
+  .off-canvas-sidebar[data-active-color="user"] .nav li.active > a,
+  .off-canvas-sidebar[data-active-color="user"] .nav li.active > a i,
+  .off-canvas-sidebar[data-active-color="user"] .nav li.active > a[data-toggle="collapse"],
+  .off-canvas-sidebar[data-active-color="user"] .nav li.active > a[data-toggle="collapse"] i,
+  .off-canvas-sidebar[data-active-color="user"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active .sidebar-mini-icon,
+  .off-canvas-sidebar[data-active-color="user"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active > a {
+    color: #FFA100;
+    opacity: 1; }
+    .sidebar[data-active-color="parent"] .nav li.active > a,
+  .sidebar[data-active-color="parent"] .nav li.active > a i,
+  .sidebar[data-active-color="parent"] .nav li.active > a[data-toggle="collapse"],
+  .sidebar[data-active-color="parent"] .nav li.active > a[data-toggle="collapse"] i,
+  .sidebar[data-active-color="parent"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active .sidebar-mini-icon,
+  .sidebar[data-active-color="parent"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active > a,
+  .off-canvas-sidebar[data-active-color="parent"] .nav li.active > a,
+  .off-canvas-sidebar[data-active-color="parent"] .nav li.active > a i,
+  .off-canvas-sidebar[data-active-color="parent"] .nav li.active > a[data-toggle="collapse"],
+  .off-canvas-sidebar[data-active-color="parent"] .nav li.active > a[data-toggle="collapse"] i,
+  .off-canvas-sidebar[data-active-color="parent"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active .sidebar-mini-icon,
+  .off-canvas-sidebar[data-active-color="parent"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active > a {
+    color: #303347;
+    opacity: 1; }
+  .sidebar[data-active-color="merchant"] .nav li.active > a,
+  .sidebar[data-active-color="merchant"] .nav li.active > a i,
+  .sidebar[data-active-color="merchant"] .nav li.active > a[data-toggle="collapse"],
+  .sidebar[data-active-color="merchant"] .nav li.active > a[data-toggle="collapse"] i,
+  .sidebar[data-active-color="merchant"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active .sidebar-mini-icon,
+  .sidebar[data-active-color="merchant"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active > a,
+  .off-canvas-sidebar[data-active-color="merchant"] .nav li.active > a,
+  .off-canvas-sidebar[data-active-color="merchant"] .nav li.active > a i,
+  .off-canvas-sidebar[data-active-color="merchant"] .nav li.active > a[data-toggle="collapse"],
+  .off-canvas-sidebar[data-active-color="merchant"] .nav li.active > a[data-toggle="collapse"] i,
+  .off-canvas-sidebar[data-active-color="merchant"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active .sidebar-mini-icon,
+  .off-canvas-sidebar[data-active-color="merchant"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active > a {
+    color: #ef8858;
     opacity: 1; }
   .sidebar[data-active-color="default"] .nav li.active > a,
   .sidebar[data-active-color="default"] .nav li.active > a i,

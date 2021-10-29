@@ -66,10 +66,10 @@ $routes->post('/superadmin/edit_merchant/(:alphanum)', 'SuperAdminController::ed
 $routes->get('/superadmin/delete_merchant/(:alphanum)', 'SuperAdminController::deleteMerchant/$1',['filter' => 'authSuperAdmin']);
 $routes->post('/superadmin/delete_merchant/(:alphanum)', 'SuperAdminController::deleteMerchantAction/$1',['filter' => 'authSuperAdmin']);
 
-//SECURITY MANAGEMENT
+//SECURITY MANAGEMENT *coming soon*
 $routes->get('/superadmin/securitymgmt', 'SuperAdminController::securityMgmtIndex',['filter' => 'authSuperAdmin']);
 
-//ANALYTICS
+//ANALYTICS *coming soon*
 $routes->get('/superadmin/analytics', 'SuperAdminController::analyticsIndex',['filter' => 'authSuperAdmin']);
 
 //SETTINGS
@@ -90,7 +90,7 @@ $routes->post('/user/login', 'LoginController::loginUser');
 $routes->get('/user/register', 'RegisterController::userIndex');
 $routes->post('/user/register', 'RegisterController::registerUser');
 
-//FORGOT PASSWORD
+//FORGOT PASSWORD *coming soon*
 $routes->get('/user/forgotpass', 'ForgotPasswordController::userIndex');
 $routes->post('/user/forgotpass', 'ForgotPasswordController::userForgotPass');
 
@@ -98,7 +98,7 @@ $routes->post('/user/forgotpass', 'ForgotPasswordController::userForgotPass');
 $routes->get('/user/index', 'UserController::index',['filter' => 'authUser']);
 $routes->get('/user/logout', 'UserController::logout',['filter' => 'authUser']);
 
-//SCAN QR
+//SCAN QR *coming soon*
 $routes->get('/user/scanqr', 'UserController::scanQRIndex',['filter' => 'authUser']);
 $routes->post('/user/scanqr', 'UserController::scanQRPayment',['filter' => 'authUser']);
 
@@ -112,7 +112,7 @@ $routes->post('/user/topup', 'UserController::topUpAction',['filter' => 'authUse
 
 //VIEW TRANSACTION
 $routes->get('/user/transactions', 'UserController::transactionIndex',['filter' => 'authUser']);
-$routes->get('/user/view_transaction', 'UserController::viewTransactionById',['filter' => 'authUser']);
+$routes->get('/user/view_transaction/(:alphanum)', 'UserController::viewTransactionById/$1',['filter' => 'authUser']);
 
 //MANAGE CARDS
 $routes->get('/user/cardmgmt', 'UserController::cardMgmtIndex',['filter' => 'authUser']);
@@ -207,13 +207,12 @@ $routes->get('/merchant/displayqr', 'MerchantController::displayQR',['filter' =>
 
 //VIEW TRANSACTION & TOTAL EARNINGS
 $routes->get('/merchant/transactions', 'MerchantController::transactionsIndex',['filter' => 'authMerchant']);
-$routes->get('/merchant/view_transaction', 'MerchantController::viewTransactionById',['filter' => 'authMerchant']);
-$routes->get('/merchant/total_earnings', 'MerchantController::viewTotalEarnings',['filter' => 'authMerchant']);
+$routes->get('/merchant/view_transaction/(:alphanum)', 'MerchantController::viewTransactionById/$1',['filter' => 'authMerchant']);
+$routes->get('/merchant/totalearning', 'MerchantController::viewTotalEarnings',['filter' => 'authMerchant']);
 
 //SETUP LINK BANK
 $routes->get('/merchant/setupbank', 'MerchantController::setUpBankIndex',['filter' => 'authMerchant']);
-$routes->get('/merchant/add_bank_details', 'MerchantController::addBankDetailsIndex',['filter' => 'authMerchant']);
-$routes->post('/merchant/add_bank_details', 'MerchantController::addBankDetailsAction',['filter' => 'authMerchant']);
+$routes->post('/merchant/setupbank', 'MerchantController::updateBankDetailsAction',['filter' => 'authMerchant']);
 $routes->get('/merchant/transfer_amount', 'MerchantController::transferAmount',['filter' => 'authMerchant']);
 $routes->post('/merchant/transfer_amount', 'MerchantController::transferAmountAction',['filter' => 'authMerchant']);
 
@@ -222,8 +221,7 @@ $routes->get('/merchant/payment', 'MerchantController::paymentIndex',['filter' =
 $routes->post('/merchant/payment', 'MerchantController::makepayment',['filter' => 'authMerchant']);
 
 //SETTINGS
-$routes->get('/merchant/profile', 'MerchantController::profileIndex',['filter' => 'authMerchant']);
-$routes->post('/merchant/profile', 'MerchantController::profileChangeAction',['filter' => 'authMerchant']);
+$routes->get('/merchant/changepass', 'MerchantController::changePassword',['filter' => 'authMerchant']);
 $routes->post('/merchant/changepass', 'MerchantController::changePasswordAction',['filter' => 'authMerchant']);
 
 /*

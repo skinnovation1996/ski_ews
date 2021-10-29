@@ -12,7 +12,7 @@
                         <div class="col-7 col-md-8">
                             <div class="numbers">
                                 <p class="card-category">Your Current Balance: </p>
-                                <p class="card-title">RM <?php echo $yourBalance; ?><p>
+                                <p class="card-title">RM <?php echo number_format($balance, 2); ?><p>
                             </div>
                         </div>
                     </div>

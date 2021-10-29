@@ -51,12 +51,12 @@ class UserController extends Controller
 
     public function scanQRPayment()
     {
-        
+        //coming soon
     }
 
     public function topUpIndex()
     {
-        $data = ['navactive' => 'topup', 'pagetitle' => 'Top Up', 'balance' => $this->yourBalance()];
+        $data = ['navactive' => 'topup', 'pagetitle' => 'Top Up', 'balance' => $this->yourBalance(), 'cards' => $this->listCards()];
 
         echo view('templates/header', $data);
         echo view('sidebars/user', $data);
@@ -64,6 +64,50 @@ class UserController extends Controller
 
         echo view('user/topup');
         echo view('templates/footer');
+    }
+
+    public function topUpAction()
+    {
+        $walletModel = new Wallet();
+        $my_user_id = $_SESSION['user_id'];
+        $yourBalance = number_format($this->yourBalance(), 2);
+
+        $amount = $this->request->getVar('amount');
+        $payment_type = $this->request->getVar('payment_select');
+        $wallet_id = $this->request->getVar('wallet_id');
+
+        if($payment_type == "Online Banking"){
+            $_SESSION['message'] = 'Online banking coming soon.';
+            $_SESSION['alertType'] = 'alert-danger';
+            $_SESSION['alertIcon'] = 'nc-simple-remove';
+            $_SESSION['alertStart'] = 'Error!';
+            return $this->response->redirect(site_url('user/topup'));
+        }else{
+            //reserved for calling topup from card
+
+            //add amount to the User Wallet
+            $data = [
+                'total_amt'  => $yourBalance + $amount,
+            ];
+
+            try{
+                $walletModel->update($wallet_id, $data);
+            }catch(\Exception $e) {
+                $_SESSION['message'] = 'Database error. Please try again';
+                $_SESSION['alertType'] = 'alert-danger';
+                $_SESSION['alertIcon'] = 'nc-simple-remove';
+                $_SESSION['alertStart'] = 'Error!';
+                return $this->response->redirect(site_url('user/topup'));
+            }
+            $_SESSION['message'] = "You have successfully topped up RM $amount to your wallet!";
+            $_SESSION['alertType'] = 'alert-success';
+            $_SESSION['alertIcon'] = 'nc-check-2';
+            $_SESSION['alertStart'] = 'Success!';
+            return $this->response->redirect(site_url('user/topup'));
+
+        
+        }
+
     }
 
     public function transactionIndex()
@@ -132,6 +176,7 @@ class UserController extends Controller
         $cardModel = new Card();
 
         $card_number = $this->request->getVar('card_num');
+        //$primary_card = $this->request->getVar('primary_card');
 
         //get type
         if(preg_match("/^4[0-9]{12}(?:[0-9]{3})?/", $card_number)){
@@ -232,11 +277,12 @@ class UserController extends Controller
     public function deleteCard($card_id = null)
     {
         $cardModel = new Card();
-        $sqlresult = $cardModel->where('card_id', $card_id)->first();
+        $my_user_id = $_SESSION['user_id'];
+        $sqlresult = $cardModel->where('user_id',$my_user_id)->where('card_id', $card_id)->first();
 
         if($sqlresult != NULL){
             
-            $data = ['navactive' => 'usermgmt', 'pagetitle' => 'Delete Card', 'card' => $sqlresult, 'backbutton' => "cardmgmt", 'balance' => $this->yourBalance()];
+            $data = ['navactive' => 'cardmgmt', 'pagetitle' => 'Delete Card', 'card' => $sqlresult, 'backbutton' => "cardmgmt", 'balance' => $this->yourBalance()];
 
             echo view('templates/header', $data);
             echo view('sidebars/user', $data);
@@ -252,7 +298,8 @@ class UserController extends Controller
     public function deleteCardAction($card_id)
     {
         $cardModel = new Card();
-        $sqlresult = $cardModel->where('card_id', $card_id)->delete($card_id);
+        $my_user_id = $_SESSION['user_id'];
+        $sqlresult = $cardModel->where('user_id',$my_user_id)->where('card_id', $card_id)->first();
         $_SESSION['message'] = 'You have successfully removed your payment card from the system.';
         $_SESSION['alertType'] = 'alert-success';
         $_SESSION['alertIcon'] = 'nc-check-2';
@@ -290,6 +337,88 @@ class UserController extends Controller
 
         echo view('user/profile');
         echo view('templates/footer');
+    }
+
+    public function profileChangeAction()
+    {
+        $userModel = new User();
+        $user_id = $this->request->getVar('user_id');
+        $data = [
+            'name' => $this->request->getVar('name'),
+            'email'  => $this->request->getVar('email'),
+            'age'  => $this->request->getVar('age'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ];
+
+        try{
+            $userModel->update($user_id, $data);
+        }catch(\Exception $e) {
+            $_SESSION['message'] = 'Database error. Please try again';
+            $_SESSION['alertType'] = 'alert-danger';
+            $_SESSION['alertIcon'] = 'nc-simple-remove';
+            $_SESSION['alertStart'] = 'Error!';
+            return $this->response->redirect(site_url('user/profile'));
+        }
+        $_SESSION['message'] = 'You have successfully edited your profile.';
+        $_SESSION['alertType'] = 'alert-success';
+        $_SESSION['alertIcon'] = 'nc-check-2';
+        $_SESSION['alertStart'] = 'Success!';
+        return $this->response->redirect(site_url('user/profile'));
+    }
+
+    public function changePasswordAction()
+    {
+        $userModel = new User();
+        $user_id = $this->request->getVar('user_id');
+
+        $old_password = $this->request->getVar('old_password');
+
+        $checkOldPass = $userModel->where('user_id', $user_id)->first();
+        
+        if($checkOldPass){
+            $pass = $checkOldPass['password'];
+            $authenticatePassword = password_verify($old_password, $pass);
+            if($authenticatePassword){
+                $new_password = $this->request->getVar('new_password');
+                $confirm_password = $this->request->getVar('confirm_password');
+
+                if($new_password == $confirm_password){
+                    $data = [
+                        'password' => password_hash($this->request->getVar('new_password'), PASSWORD_DEFAULT),
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ];
+                    try{
+                        $userModel->update($user_id, $data);
+                    }catch(\Exception $e) {
+                        $_SESSION['message'] = 'Database error. Please try again';
+                        $_SESSION['alertType'] = 'alert-danger';
+                        $_SESSION['alertIcon'] = 'nc-simple-remove';
+                        $_SESSION['alertStart'] = 'Error!';
+                        return $this->response->redirect(site_url('user/profile'));
+                    }
+                    $_SESSION['message'] = 'You have successfully updated your password.';
+                    $_SESSION['alertType'] = 'alert-success';
+                    $_SESSION['alertIcon'] = 'nc-check-2';
+                    $_SESSION['alertStart'] = 'Success!';
+                    return $this->response->redirect(site_url('user/profile'));
+
+                }else{
+                    $_SESSION['message'] = 'New and confirm password do not match.';
+                    $_SESSION['alertType'] = 'alert-danger';
+                    $_SESSION['alertIcon'] = 'nc-simple-remove';
+                    $_SESSION['alertStart'] = 'Error!';
+                    return $this->response->redirect(site_url('user/profile'));
+                }
+            }else{
+                $_SESSION['message'] = 'Invalid old password.';
+                $_SESSION['alertType'] = 'alert-danger';
+                $_SESSION['alertIcon'] = 'nc-simple-remove';
+                $_SESSION['alertStart'] = 'Error!';
+                return $this->response->redirect(site_url('user/profile'));
+            }
+        }else{
+            return $this->response->redirect(site_url('user/profile'));
+        }
     }
 
     public function pocketsIndex()
@@ -348,6 +477,12 @@ class UserController extends Controller
                 $_SESSION['alertStart'] = 'Error!';
                 return $this->response->redirect(site_url('user/add_pocket'));
             }
+
+            //update to wallet count too
+            $walletModel = new Wallet();
+            $numOfPockets = $walletModel->select("num_of_pockets")->where("user_id", $my_user_id)->first();
+            $data2 = ['num_of_pockets' => $numOfPockets + 1];
+        
             $_SESSION['message'] = 'You have successfully added your pocket!';
             $_SESSION['alertType'] = 'alert-success';
             $_SESSION['alertIcon'] = 'nc-check-2';
@@ -454,7 +589,7 @@ class UserController extends Controller
 
         if($sqlresult == TRUE){
             $sqlresult2 = $transactionModel->where('user_id',$my_user_id)->where('pocket_id', $pocket_id)->orderBy('transaction_id','DESC')->findAll();
-            $data = ['navactive' => 'pockets', 'balance' => $this->yourBalance(), 'pagetitle' => 'View Pocket Transactions', 'backbutton' => "pockets"];
+            $data = ['navactive' => 'pockets', 'balance' => $this->yourBalance(), 'pagetitle' => 'View Pocket Transactions', 'backbutton' => "pockets", "transactions" => $sqlresult2];
 
             echo view('templates/header', $data);
             echo view('sidebars/user', $data);
@@ -501,15 +636,22 @@ class UserController extends Controller
         $sqlresult = $walletModel->where('user_id',$my_user_id)->first();
 
         if($sqlresult == TRUE){
-            $yourBalanceSql = $walletModel->select("total_amt")->where("user_id", $my_user_id)->get();
-            return $yourBalanceSql;
+            $yourBalanceSql = $walletModel->select("total_amt")->where("user_id", $my_user_id)->first();
+            return $yourBalanceSql['total_amt'];
         }else{
             $walletSql = $this->createWalletDefault();
-            $yourBalance = $walletModel->select("total_amt")->where("user_id", $my_user_id)->get();
-            return $yourBalance;
+            $yourBalance = $walletModel->select("total_amt")->where("user_id", $my_user_id)->first();
+            return $yourBalance['total_amt'];
         }
 
         
+    }
+
+    public function listCards(){
+        $cardModel = new Card();
+        $my_user_id = $_SESSION['user_id'];
+        $listCard = $cardModel->where('user_id',$my_user_id)->orderBy('card_id','ASC')->findAll();
+        return $listCard;
     }
 
     public function countNumOfTransactrions(){

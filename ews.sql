@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2021 at 09:10 AM
+-- Generation Time: Oct 29, 2021 at 11:19 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -187,7 +187,7 @@ CREATE TABLE `ews_user` (
 --
 
 INSERT INTO `ews_user` (`user_id`, `name`, `age`, `card_number`, `email`, `email_verified_at`, `password`, `parent_code`, `remember_token`, `created_at`, `updated_at`) VALUES
-('ahmadali123 ', 'Ahmad Bin Ali', 28, '', 'ahmad@binali.com', '2021-10-04 07:34:33', '$2y$10$EjSVpPT4JQeELXd6KTBNFe4FKCSX7VT39TH0/sdvOSew/6diYR6a6', 'AHMADALI', '1', '2021-10-04 07:34:33', '2021-10-26 10:50:44'),
+('ahmadali123 ', 'Ahmad Bin Ali', 31, '', 'ahmad@binali.com', '2021-10-04 07:34:33', '$2y$10$EjSVpPT4JQeELXd6KTBNFe4FKCSX7VT39TH0/sdvOSew/6diYR6a6', 'AHMADALI', '1', '2021-10-04 07:34:33', '2021-10-29 02:46:31'),
 ('amirulhaikal123', 'Amirul Haikal', 31, '', 'amirul@haikal.com', NULL, '$2y$10$GrKXBaRuMJe/GIQBXn7so.8Vj78ah7KHquAEcvW/LMlWmFwz4Scuy', 'PRT-ANPU788HMP', NULL, '2021-10-27 08:50:41', '2021-10-27 08:50:41'),
 ('super_admin', 'Super Admin', 99, '1', 'admin@paper.com', '2021-09-29 23:29:05', '$2y$10$EjSVpPT4JQeELXd6KTBNFe4FKCSX7VT39TH0/sdvOSew/6diYR6a6', 'none', NULL, '2021-09-29 23:29:05', '2021-09-29 23:29:05');
 
@@ -211,7 +211,7 @@ CREATE TABLE `ews_wallet` (
 --
 
 INSERT INTO `ews_wallet` (`wallet_id`, `user_id`, `num_of_pockets`, `total_amt`, `created_at`, `updated_at`) VALUES
-('WALLET-ahmadali123 ', 'ahmadali123 ', 0, 0, NULL, NULL);
+('WALLET-ahmadali123 ', 'ahmadali123 ', 0, 374, NULL, NULL);
 
 -- --------------------------------------------------------
 

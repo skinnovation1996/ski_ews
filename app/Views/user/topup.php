@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <?php if(isset($_SESSION['message'])){ ?>
                             <div class="alert <?php echo $_SESSION['alertType'];?> alert-dismissible fade show" role="alert">
-                                <span class="alert-inner--icon"><i class="ni <?php echo $_SESSION['alertIcon'];?>"></i> </span>
+                                <span class="alert-inner--icon"><i class="nc-icon <?php echo $_SESSION['alertIcon'];?>"></i> </span>
                                 <span class="alert-inner--text"><strong><?php echo $_SESSION['alertStart'];?></strong> <?php echo $_SESSION['message'];?></span>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -23,8 +23,8 @@
                             <div class="row">
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="amount">Top Up Amount (RM)</label>
-                                        <input type="num" min="0" id="amount" name="amount" class="form-control form-control-alternative" placeholder="Top Up Amount..." required>
+                                        <label class="form-control-label" for="amount">Top Up Amount (min RM10)</label>
+                                        <input type="num" min="10" id="amount" name="amount" class="form-control form-control-alternative" placeholder="Top Up Amount..." required>
                                     </div>
                                 </div>
                                 <div class="col-lg-9">
@@ -32,8 +32,17 @@
                                         <label class="form-control-label" for="payment_select">Select Card</label>
                                         <select name="payment_select" id="payment_select" class="form-control form-control-alternative" required>
                                             <?php
-                                            
+                                            foreach($cards as $card){
+                                                $card_id = $card['card_id'];
+                                                $card_num = $card['card_num'];
+                                                $card_type = $card['type'];
+                                                
                                             ?>
+                                            <option value="<?php echo $card['card_num'];?>"><?php echo substr_replace($card_num,"xxxxxxxxxxxx",1,11);?> -- <?php echo $card_type;?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                            <option value="Online Banking">Online Banking/FPX</option>
                                         </select>
                                     </div>
                                 </div>
@@ -47,7 +56,6 @@
                     </div>
                 </form>
                     
-                </div>
             </div>
         </div>
     </div>

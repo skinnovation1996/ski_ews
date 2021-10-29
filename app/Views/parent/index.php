@@ -12,7 +12,7 @@
                         <div class="col-7 col-md-8">
                             <div class="numbers">
                                 <p class="card-category">User's Current Balance: </p>
-                                <p class="card-title">RM 0.00<p>
+                                <p class="card-title">RM <?php echo number_format($balance, 2); ?><p>
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                         <div class="col-7 col-md-8">
                             <div class="numbers">
                                 <p class="card-category">No. Of Transactions</p>
-                                <p class="card-title">0<p>
+                                <p class="card-title"><?php echo $numOfTransactions;?><p>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                         <div class="col-7 col-md-8">
                             <div class="numbers">
                                 <p class="card-category">No. Of User's Pockets</p>
-                                <p class="card-title">0<p>
+                                <p class="card-title"><?php echo $numOfPockets;?><p>
                             </div>
                         </div>
                     </div>

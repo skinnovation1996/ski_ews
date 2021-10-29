@@ -23,7 +23,7 @@
                 <span class="navbar-toggler-bar navbar-kebab"></span>
                 <span class="navbar-toggler-bar navbar-kebab"></span>
             </button>
-            <span class="d-lg-block d-md-block d-sm-none d-xs-none justify-content-end">My Balance: RM 0.00 <?php //tba ?></span>
+            <span class="d-lg-block d-md-block d-sm-none d-xs-none justify-content-end">My Balance: RM <?php echo number_format($balance, 2); ?></span>
             <div class="collapse navbar-collapse justify-content-end" id="navigation">
                 <ul class="navbar-nav">
                     <li class="nav-item btn-rotate dropdown">

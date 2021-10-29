@@ -12,7 +12,7 @@
                         <div class="col-7 col-md-8">
                             <div class="numbers">
                                 <p class="card-category">Total Earnings: </p>
-                                <p class="card-title">RM <?php echo $totalearnings;?><p>
+                                <p class="card-title">RM <?php echo number_format($totalearnings, 2); ?><p>
                             </div>
                         </div>
                     </div>
