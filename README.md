@@ -2,7 +2,6 @@
 
 ## A project from SK Innovation
 
-
 ## Installation
 To install, extract all the files to "C:/xampp/htdocs" directory. Create directory name "ews" and put all the files. To begin using this system, open "localhost/ews".
 
