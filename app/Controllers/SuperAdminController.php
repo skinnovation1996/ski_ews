@@ -359,6 +359,74 @@ class SuperAdminController extends Controller
         echo view('templates/footer');
     }
 
+    public function changePassword()
+    {
+        $session = session();
+        $data = ['navactive' => 'index', 'pagetitle' => 'Change Password'];
+
+        echo view('templates/header', $data);
+        echo view('sidebars/superadmin', $data);
+        echo view('navbars/superadmin', $data);
+
+        echo view('superadmin/changepass');
+        echo view('templates/footer');
+    }
+
+    public function changePasswordAction()
+    {
+        $userModel = new User();
+        $user_id = $this->request->getVar('user_id');
+
+        $old_password = $this->request->getVar('old_password');
+
+        $checkOldPass = $userModel->where('user_id', $user_id)->first();
+        
+        if($checkOldPass){
+            $pass = $checkOldPass['password'];
+            $authenticatePassword = password_verify($old_password, $pass);
+            if($authenticatePassword){
+                $new_password = $this->request->getVar('new_password');
+                $confirm_password = $this->request->getVar('confirm_password');
+
+                if($new_password == $confirm_password){
+                    $data = [
+                        'password' => password_hash($this->request->getVar('new_password'), PASSWORD_DEFAULT),
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ];
+                    try{
+                        $userModel->update($user_id, $data);
+                    }catch(\Exception $e) {
+                        $_SESSION['message'] = 'Database error. Please try again';
+                        $_SESSION['alertType'] = 'alert-danger';
+                        $_SESSION['alertIcon'] = 'nc-simple-remove';
+                        $_SESSION['alertStart'] = 'Error!';
+                        return $this->response->redirect(site_url('superadmin/changepass'));
+                    }
+                    $_SESSION['message'] = 'You have successfully updated your password.';
+                    $_SESSION['alertType'] = 'alert-success';
+                    $_SESSION['alertIcon'] = 'nc-check-2';
+                    $_SESSION['alertStart'] = 'Success!';
+                    return $this->response->redirect(site_url('superadmin/changepass'));
+
+                }else{
+                    $_SESSION['message'] = 'New and confirm password do not match.';
+                    $_SESSION['alertType'] = 'alert-danger';
+                    $_SESSION['alertIcon'] = 'nc-simple-remove';
+                    $_SESSION['alertStart'] = 'Error!';
+                    return $this->response->redirect(site_url('superadmin/changepass'));
+                }
+            }else{
+                $_SESSION['message'] = 'Invalid old password.';
+                $_SESSION['alertType'] = 'alert-danger';
+                $_SESSION['alertIcon'] = 'nc-simple-remove';
+                $_SESSION['alertStart'] = 'Error!';
+                return $this->response->redirect(site_url('superadmin/changepass'));
+            }
+        }else{
+            return $this->response->redirect(site_url('superadmin/changepass'));
+        }
+    }
+
 
     public function countNumOfUsers(){
         $userModel = new User();

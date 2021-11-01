@@ -529,7 +529,7 @@ class UserController extends Controller
             'merchant_type'  => $this->request->getVar('merchant_type'),
             'purchase_item_name' => $this->request->getVar('purchase_item_name'),
             'purchase_item_type'  => $this->request->getVar('purchase_item_type'),
-            'updated_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s")
         ];
 
         try{
@@ -569,15 +569,16 @@ class UserController extends Controller
         }
     }
 
-    public function deletePocketAction($card_id)
+    public function deletePocketAction($pocket_id)
     {
         $pocketModel = new Pocket();
-        $sqlresult = $pocketModel->where('pocket_id', $pocket_id)->delete($pocket_id);
+        $my_user_id = $_SESSION['user_id'];
+        $sqlresult = $pocketModel->where('user_id', $my_user_id)->where('pocket_id', $pocket_id)->delete($pocket_id);
         $_SESSION['message'] = 'You have successfully removed your pocket from the system.';
         $_SESSION['alertType'] = 'alert-success';
         $_SESSION['alertIcon'] = 'nc-check-2';
         $_SESSION['alertStart'] = 'Success!';
-        return $this->response->redirect(site_url('user/pocket'));
+        return $this->response->redirect(site_url('user/pockets'));
     }
 
     public function viewPocketTransactionbyId($pocket_id = NULL)

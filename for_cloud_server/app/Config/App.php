@@ -23,7 +23,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://localhost/ews_ci2';
+    public $baseURL = 'https://ski-ews.azurewebsites.net';
 
     /**
      * --------------------------------------------------------------------------
